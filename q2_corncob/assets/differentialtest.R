@@ -133,7 +133,7 @@ fulltable <- as.data.frame(fullAnalysisTable)
 fulltable_tax <- merge(fulltable,tax, by = 0)
 exporttable <- data.frame(fulltable_tax[,-1], row.names=fulltable_tax[,1])
 
-exporttable <- exporttable[c("Taxon","DA", "DV","Confidence")]
+exporttable <- exporttable[c("Taxon","DA", "DV")]
 
 write.table(exporttable, out.file , sep = "\t", 
             row.names = T, 
