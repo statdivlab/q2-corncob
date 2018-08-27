@@ -48,12 +48,16 @@ tax_table(ps)
 # write out table with fdr p-values 
 fullAnalysisTable <- fullAnalysis[[2]]
 fulltable <- as.data.frame(fullAnalysisTable)
-fulltable_tax <- merge(fulltable,the_taxonomy, by = 0)
+fulltable_tax <- merge(fulltable,tax, by = 0)
 head(fulltable_tax)
 dim(fulltable_tax)
 
-colnames(fulltable_tax)[1] <- "Taxon" 
 
-write.table(fulltable_tax, "teststuff.tsv" , sep = "\t", 
-            row.names = F,
+exporttable <- data.frame(fulltable_tax[,-1], row.names=fulltable_tax[,1])
+
+exporttable <- exporttable[c("Taxon","DA", "DV","Confidence")]
+
+
+write.table(exporttable, "teststuff.tsv" , sep = "\t", 
+            row.names = T,
             quote = F)

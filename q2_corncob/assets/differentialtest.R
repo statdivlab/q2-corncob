@@ -130,14 +130,13 @@ fullAnalysis <- differentialTest(formula = ~ ReportedAntibioticUsage,
 # write out table with fdr p-values 
 fullAnalysisTable <- fullAnalysis$p_fdr
 fulltable <- as.data.frame(fullAnalysisTable)
-fulltable_tax <- merge(fulltable,the_taxonomy, by = 0)
+fulltable_tax <- merge(fulltable,tax, by = 0)
+exporttable <- data.frame(fulltable_tax[,-1], row.names=fulltable_tax[,1])
 
-colnames(fulltable_tax)[1] <- "Taxon" 
+exporttable <- exporttable[c("Taxon","DA", "DV","Confidence")]
 
-fulltable_tax <- fulltable_tax[c("Taxon","DA", "DV", "Kingdom", "Phylum","Class","Order", "Family","Genus","Species","Confidence")]
-
-write.table(fulltable_tax, out.file , sep = "\t", 
-            row.names = F, 
+write.table(exporttable, out.file , sep = "\t", 
+            row.names = T, 
             quote = F)
 
 q(status=0)

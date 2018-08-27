@@ -39,7 +39,7 @@ plugin.methods.register_function(
                 'variable': Str,
     },
     
-    outputs=[('output',FeatureData[Taxonomy % Properties(["Taxon", "DA", "DV", "Kingdom", "Phylum", "Class", "Order", "Family", "Genus", "Species", "Confidence"])])],
+    outputs=[('output',FeatureData[Taxonomy % Properties(["Taxon", "DA", "DV", "Confidence"])])],
     input_descriptions={'table': ('A feature table.'),
                         'taxonomy': ('Your taxonomic classification by unique feature')
     },
