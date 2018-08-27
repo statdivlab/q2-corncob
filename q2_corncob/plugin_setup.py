@@ -7,10 +7,13 @@
 # ----------------------------------------------------------------------------
 import importlib
 
-
 import qiime2.plugin
+from qiime2.plugin import (Plugin, Str, Properties, Choices, Int, Bool, Range, Float, Set, Visualization, Metadata, MetadataColumn, Categorical, Numeric, Citations)
+
+import q2_types
 from q2_types.sample_data import SampleData
-from q2_types.feature_table import FeatureTable, Frequency
+from q2_types.feature_table import FeatureTable, Frequency, Composition
+from q2_types.feature_data import FeatureData, Taxonomy, TSVTaxonomyFormat
 
 import q2_corncob
 
@@ -27,22 +30,25 @@ plugin = qiime2.plugin.Plugin(
     citations=[citations['martin2018']]
 )
 
-# has to match _seq_depth.py
-# parameters arent artifacts
-plugin.visualizers.register_function(
-    function=q2_corncob.seq_depth,
-    inputs={'table': FeatureTable[Frequency]
+plugin.methods.register_function(
+    function=q2_corncob.differentialtest,
+    inputs={'table': FeatureTable[Frequency],
+            'taxonomy': FeatureData[Taxonomy]
     },
-    parameters={'metadata': qiime2.plugin.Metadata,
-                'mypar': qiime2.plugin.Float},
-    input_descriptions={
-        'table': ('A feature table.')
+    parameters={'metadata': Metadata,
+                'variable': Str,
     },
-    parameter_descriptions={
-         'mypar': ('A parameter description.'),
-         'metadata': ('Metadata')
+    
+    outputs=[('output',FeatureData[Taxonomy % Properties(["Taxon", "DA", "DV", "Kingdom", "Phylum", "Class", "Order", "Family", "Genus", "Species", "Confidence"])])],
+    input_descriptions={'table': ('A feature table.'),
+                        'taxonomy': ('Your taxonomic classification by unique feature')
     },
-    name='Get sequencing depth',
-    description=('This method gets sequencing depth.')
+                                 
+    output_descriptions={'output': 'A table of FDR <0.05 p-values.'
+    },
+    parameter_descriptions={'metadata': ('Your metadata'),
+                            'variable': ('A categorical variable in your metadata')},
+    name='Run differential test',
+    description='This method runs differential test.'
 )
 

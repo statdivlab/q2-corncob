@@ -1,3 +1,3 @@
-from ._seq_depth import seq_depth 
+from ._differentialtest import differentialtest
 
-__all__ = ["seq_depth"]
+__all__ = ["corncob"]

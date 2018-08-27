@@ -18,10 +18,9 @@ setup(
     author="Bryan D Martin",
     author_email="bmartin6@uw.edu",
     description="Apply corncob for dysbiosis. ",
-    scripts=['q2_corncob/assets/seq_depth.R'],
+    scripts=['q2_corncob/assets/differentialtest.R'],
     package_data={
-        'q2_corncob': ['citations.bib'],
-        'q2_corncob.assets': ['seq_depth.R']
+        'q2_corncob': ['citations.bib']
       # BRYAN TODO: WHAT
 #        'q2_corncob.tests': ['data/*',
 #                           'data/expected/*',
