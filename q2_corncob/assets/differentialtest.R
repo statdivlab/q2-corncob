@@ -132,8 +132,8 @@ sample_data(ps)
 
 set.seed(1)
 
-fullAnalysis <- differentialTest(formula = ~ variable,
-                                 phi.formula = ~ variable,
+fullAnalysis <- differentialTest(formula = formula(paste("~", variable)),
+                                 phi.formula = formula(paste("~", variable)),
                                  formula_null = ~ 1,
                                  phi.formula_null = ~ 1,
                                  data = ps,
@@ -141,25 +141,10 @@ fullAnalysis <- differentialTest(formula = ~ variable,
                                  inits = rbind(rep(.01, 4)))
 
 # write out table with fdr p-values 
-cat("print FullAnalysis which should be a list\n\n\n")
-print(fullAnalysis)
-
-cat("print FullAnalysis element 2 \n\n\n")
-print(fullAnalysis[[2]])
-
-cat("print FullAnalysis element1 \n\n\n")
-print(fullAnalysis[[1]])
-
-fullAnalysisTable <- fullAnalysis$p_fdr
-
-cat("print FullAnalysis$p_fdr \n\n\n")
-print(fullAnalysisTable)
 
 fulltable <- as.data.frame(fullAnalysisTable)
 
-
 fulltable_tax <- merge(fulltable,tax, by = 0)
-
 
 exporttable <- data.frame(fulltable_tax[,-1], row.names=fulltable_tax[,1])
 
@@ -170,8 +155,5 @@ print(exporttable)
 write.table(exporttable, out.file, sep = "\t", 
             row.names = T, 
             quote = F)
-
-write.table(exporttable, '~/hello_test.tsv' , sep = "\t", 
-            row.names = T,  quote = F, col.names = NA)
 
 q(status=0)
