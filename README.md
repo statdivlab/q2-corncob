@@ -53,10 +53,32 @@ This is a Community Tutorial for q2-corncob within the qiime2-2018.6 release.
 - within-taxon correlation
 - hypothesis testing with categorical and continuous covariates
 
+A vignette on how to use `corncob` in `R` can be found [here]().
+
+Currently, q2-corncob has made available the following functions within `corncob`:
+- `differentialtest()`
 
 ### Citing `corncob`
 Please cite the following when using `corncob`...
-- differentialtest()
+- `differentialtest()`
 
 ### How to use `q2-corncob`
 For this tutorial we will be using data from the "Moving Pictures" tutorial. q2-corncob requires input of a FeatureTable, Metadata, Taxonomy, and a covariate of interest.
+
+<a href="https://github.com/statdivlab/q2-corncob/blob/master/data/table.qza?raw=true" download>table.qza</a>
+<br><a href="https://github.com/statdivlab/q2-corncob/blob/master/data/taxonomy.qza?raw=true" download>taxonomy.qza</a>
+<br><a href="https://raw.githubusercontent.com/statdivlab/q2-corncob/master/data/metadata.tsv" download>metadata.tsv</a>
+
+
+Let's say that we are interested in seeing if there are ASV's that are differentially abundant or differentially variable across groups of ReportedAntibioticUsage.
+```
+qiime corncob differentialtest \
+--i-table table.qza \
+--m-metadata-file metadata.tsv \
+--p-variable ReportedAntibioticUsage \
+--i-taxonomy taxonomy.qza \
+--o-output corncobresults
+```
+Our results show a table of features, taxonomic assignment, and fdr controlled p-values for differential abundance and differential variance.
+
+<a href="" download>results</a>
