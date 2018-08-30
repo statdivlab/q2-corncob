@@ -81,4 +81,4 @@ qiime corncob differentialtest \
 ```
 Our results show a table of features, taxonomic assignment, and fdr controlled p-values for differential abundance and differential variance.
 
-<a href="" download>results</a>
+<a href="https://raw.githubusercontent.com/statdivlab/q2-corncob/master/data/taxonomy.tsv" download>results</a>
