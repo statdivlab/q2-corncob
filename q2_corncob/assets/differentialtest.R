@@ -127,8 +127,7 @@ library(corncob)
 ##########################
 # TIME TO USE CORNCOB!!! #
 ##########################
-#print(variable)
-sample_data(ps)
+print(variable)
 
 set.seed(1)
 
@@ -141,6 +140,19 @@ fullAnalysis <- differentialTest(formula = formula(paste("~", variable)),
                                  inits = rbind(rep(.01, 4)))
 
 # write out table with fdr p-values 
+cat("print FullAnalysis which should be a list\n\n\n")
+print(fullAnalysis)
+
+cat("print FullAnalysis element 2 \n\n\n")
+print(fullAnalysis[[2]])
+
+cat("print FullAnalysis element1 \n\n\n")
+print(fullAnalysis[[1]])
+
+fullAnalysisTable <- fullAnalysis$p_fdr
+
+cat("print FullAnalysis$p_fdr \n\n\n")
+print(fullAnalysisTable)
 
 fulltable <- as.data.frame(fullAnalysisTable)
 
