@@ -47,6 +47,13 @@ if ("tidyr" %in% installed.packages()[,"Package"]) {
 devtools::install_github("hadley/tidyr")
 library(tidyr)
 
+#installing VGAM 
+if ("VGAM" %in% installed.packages()[,"Package"]) {
+  cat("You have vgam installed!\n\n")
+} else {
+  cat("Error: vgam needs to be installed!\n\n")
+}
+library(VGAM)
 
 errQuit <- function(mesg, status=1) {
   message("Error: ", mesg)
@@ -106,21 +113,27 @@ ps <- phyloseq(otu_table(the_otu_table, taxa_are_rows = TRUE),
 )
 
 print(ps)
+print(otu_table(ps))
+print(sample_data(ps))
+print(tax_table(ps))
 ####NOTE: REMOVE THIS OUT OF R-SCRIPT AND INTO README.md 
 
 # Install corncob using:
 devtools::install_github("bryandmartin/CORNCOB")
 # To begin, we load our example data set as a phyloseq object.
 library(corncob)
-sample_data(the_metadata)
+#sample_data(the_metadata)
 
 ##########################
 # TIME TO USE CORNCOB!!! #
 ##########################
-print(variable)
+#print(variable)
+sample_data(ps)
+
 set.seed(1)
-fullAnalysis <- differentialTest(formula = ~ ReportedAntibioticUsage,
-                                 phi.formula = ~ ReportedAntibioticUsage,
+
+fullAnalysis <- differentialTest(formula = ~ variable,
+                                 phi.formula = ~ variable,
                                  formula_null = ~ 1,
                                  phi.formula_null = ~ 1,
                                  data = ps,
@@ -128,15 +141,37 @@ fullAnalysis <- differentialTest(formula = ~ ReportedAntibioticUsage,
                                  inits = rbind(rep(.01, 4)))
 
 # write out table with fdr p-values 
+cat("print FullAnalysis which should be a list\n\n\n")
+print(fullAnalysis)
+
+cat("print FullAnalysis element 2 \n\n\n")
+print(fullAnalysis[[2]])
+
+cat("print FullAnalysis element1 \n\n\n")
+print(fullAnalysis[[1]])
+
 fullAnalysisTable <- fullAnalysis$p_fdr
+
+cat("print FullAnalysis$p_fdr \n\n\n")
+print(fullAnalysisTable)
+
 fulltable <- as.data.frame(fullAnalysisTable)
+
+
 fulltable_tax <- merge(fulltable,tax, by = 0)
+
+
 exporttable <- data.frame(fulltable_tax[,-1], row.names=fulltable_tax[,1])
 
-exporttable <- exporttable[c("Taxon","DA", "DV")]
+exporttable <- exporttable[c("Taxon","DA","DV")]
 
-write.table(exporttable, out.file , sep = "\t", 
+print(exporttable)
+
+write.table(exporttable, out.file, sep = "\t", 
             row.names = T, 
             quote = F)
+
+write.table(exporttable, '~/hello_test.tsv' , sep = "\t", 
+            row.names = T,  quote = F, col.names = NA)
 
 q(status=0)
