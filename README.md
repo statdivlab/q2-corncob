@@ -1,7 +1,5 @@
 # `corncob` QIIME2 plugin
 
-[![Build Status](https://travis-ci.org/bryandmartin/q2-corncob.svg?branch=master)](https://travis-ci.org/bryandmartin/q2-corncob)
-
 This repository contains the `corncob` QIIME 2 plugin. `corncob` is in active development and is available in `R` (https://github.com/bryandmartin/corncob) or as a QIIME 2 plugin (q2-corncob).
 
 
