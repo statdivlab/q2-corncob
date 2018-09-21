@@ -25,7 +25,7 @@ ps <- phyloseq(otu_table(the_otu_table, taxa_are_rows = TRUE),
 )
 
 ps2 <- ps %>% tax_glom("Family")
-
+variable = "ReportedAntibioticUsage"
 differential <- function(variable) {
           differentialTest(formula = ~ variable,
                                   phi.formula = ~ variable,
@@ -35,7 +35,7 @@ differential <- function(variable) {
                                   fdr_cutoff = 0.05,
                                   inits = rbind(rep(.01, 4)))
 }
-
+library(corncob)
 fullAnalysis <- differentialTest(formula = ~ ReportedAntibioticUsage,
                                  phi.formula = ~ ReportedAntibioticUsage,
                                  formula_null = ~ 1,
@@ -44,6 +44,11 @@ fullAnalysis <- differentialTest(formula = ~ ReportedAntibioticUsage,
                                  fdr_cutoff = 0.05,
                                  inits = rbind(rep(.01, 4)))
 tax_table(ps)
+fullAnalysis
+library(phyloseq)
+library(magrittr)
+ps %>% plot_richness(measures = "Shannon", col = variable)
+ps %>% tax_glom("Phylum") %>% plot_bar(facet_grid=~ReportedAntibioticUsage, fill = "Phylum")
 
 # write out table with fdr p-values 
 fullAnalysisTable <- fullAnalysis[[2]]

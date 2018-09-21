@@ -8,7 +8,7 @@
 import importlib
 
 import qiime2.plugin
-from qiime2.plugin import (Plugin, Str, Properties, Choices, Int, Bool, Range, Float, Set, Visualization, Metadata, MetadataColumn, Categorical, Numeric, Citations)
+from qiime2.plugin import (Plugin, Str, Properties, Choices, Int, Bool, Range, Float, Set, Visualization, Metadata, MetadataColumn, Categorical, Numeric, Citation, SemanticType)
 
 import q2_types
 from q2_types.sample_data import SampleData
@@ -18,6 +18,8 @@ from q2_types.feature_data import FeatureData, Taxonomy, TSVTaxonomyFormat
 import q2_corncob
 
 citations = qiime2.plugin.Citations.load('citations.bib', package='q2_corncob')
+
+
 
 plugin = qiime2.plugin.Plugin(
     name='corncob',
@@ -39,7 +41,7 @@ plugin.methods.register_function(
                 'variable': Str,
     },
     
-    outputs=[('output',FeatureData[Taxonomy % Properties(["Taxon", "DA", "DV"])])],
+    outputs=[('output',FeatureData[Corncob % Properties(["Taxon", "DA", "DV"])])],
     input_descriptions={'table': ('A feature table.'),
                         'taxonomy': ('Your taxonomic classification by unique feature')
     },
