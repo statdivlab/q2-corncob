@@ -10,10 +10,10 @@ This repository contains the `corncob` QIIME 2 plugin. `corncob` is in active de
 
 ### Activate your QIIME Environment
 
-- Here we activate our example version of QIIME, `qiime2-2018.6`. If you're not sure what your current version of QIIME is you can run `conda env list` in the command line to see a list of installed QIIME environments.
+- Here we activate our example version of QIIME, `qiime2-2018.8`. If you're not sure what your current version of QIIME is you can run `conda env list` in the command line to see a list of installed QIIME environments.
 
 ```
-source activate qiime2-2018.6
+source activate qiime2-2018.8
 ```
 
 
@@ -44,7 +44,7 @@ qiime corncob --help
 
 
 # QIIME 2 Tutorial: Using `q2-corncob`
-This is a Community Tutorial for q2-corncob within the qiime2-2018.6 release.
+This is a Community Tutorial for q2-corncob within the qiime2-2018.8 release.
 
 `corncob` is an individual taxon regression model that uses abundance tables and sample data. `corncob` is able to model differential abundance and differential variability and address the following statistical challenges with modeling micriobial relative abundance:
 - different sequencing depth
@@ -59,11 +59,10 @@ Currently, q2-corncob has made available the following functions within `corncob
 - `differentialtest()`
 
 ### Citing `corncob`
-Please cite the following when using `corncob`...
-- `differentialtest()`
+The manuscript for `corncob` is currently In Prep. 
 
 ### How to use `q2-corncob`
-For this tutorial we will be using data from the "Moving Pictures" tutorial. q2-corncob requires input of a FeatureTable, Metadata, Taxonomy, and a covariate of interest.
+For this tutorial we will be using data from the "Moving Pictures" tutorial. `q2-corncob` requires input of a FeatureTable, Metadata, Taxonomy, and a covariate of interest.
 
 <a href="https://github.com/statdivlab/q2-corncob/blob/master/data/table.qza?raw=true" download>table.qza</a>
 <br><a href="https://github.com/statdivlab/q2-corncob/blob/master/data/taxonomy.qza?raw=true" download>taxonomy.qza</a>
