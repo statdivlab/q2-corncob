@@ -8,7 +8,7 @@
 import importlib
 
 import qiime2.plugin
-from qiime2.plugin import (Plugin, Str, Properties, Choices, Int, Bool, Range, Float, Set, Visualization, Metadata, MetadataColumn, Categorical, Numeric, Citation, SemanticType)
+from qiime2.plugin import (Plugin, Str, Properties, Choices, Int, Bool, Range, Float, Set, Visualization, Metadata, MetadataColumn, Categorical, Numeric, Citations, SemanticType)
 
 import q2_types
 from q2_types.sample_data import SampleData
